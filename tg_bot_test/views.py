@@ -18,7 +18,7 @@ def handle_update(update):
 
 @csrf_exempt
 def telegram_bot(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
         update = json.loads(request.body.decode('utf-8'))
         handle_update(update)
         return HttpResponse('ok')
