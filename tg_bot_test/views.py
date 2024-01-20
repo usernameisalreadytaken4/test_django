@@ -18,13 +18,14 @@ def handle_update(update):
 
 @csrf_exempt
 def telegram_bot(request):
-    if request.method == 'GET':
+    if request.method == 'POST':
         update = json.loads(request.body.decode('utf-8'))
         handle_update(update)
         return HttpResponse('ok')
     return HttpResponseBadRequest('Bad Request')
 
 
+@csrf_exempt
 def setwebhook(request):
     response = requests.post(
         settings.TELEGRAM_API_URL + "/setWebhook?url=" + 'https://romulas.pythonanywhere.com' + reverse_lazy(
