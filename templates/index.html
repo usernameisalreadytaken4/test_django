@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="main-button">Текст</button>
+</body>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script type="application/javascript">
+    Telegram.WebApp.ready()
+    configureThemeColor(Telegram.WebApp.colorScheme);
+    configureMainButton({text: 'view cart', color: '#008000', onclick: mainButtonClickListener});
+    Telegram.WebApp.MainButton.show();
+
+    function mainButtonClickListener() {
+        if (Telegram.WebApp.MainButton.text.toLowerCase() === 'view cart') {
+            configureMainButton({text: 'close cart', color: '#FF0000', onclick: mainButtonClickListener});
+        } else {
+            configureMainButton({text: 'view cart', color: '#008000', onclick: mainButtonClickListener});
+        }
+        cart.classList.toggle('active');
+    }
+</script>
+</html>
