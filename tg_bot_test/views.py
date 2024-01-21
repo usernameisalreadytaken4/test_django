@@ -9,9 +9,17 @@ from django.views.decorators.csrf import csrf_exempt
 
 def handle_update(update):
     chat_id = update['message']['chat']['id']
-    send_message("Update", {
+    send_message("sendMessage", {
         'chat_id': chat_id,
-        'message': 'Update',
+        'text': 'проверка микрофона',
+        'reply_markup': json.dumps({
+            'inline_keyboard': [
+                {
+                    "text": "Button2",
+                    "url": "https://www.example.com"
+                },
+            ]
+        })
     })
 
 
