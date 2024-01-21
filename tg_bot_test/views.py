@@ -36,4 +36,4 @@ def setwebhook(request):
 
 
 def send_message(method, data):
-    return requests.post(settings.TELEGRAM_API_URL + method, data)
+    return requests.post(settings.TELEGRAM_API_URL + '/' + method, data)
