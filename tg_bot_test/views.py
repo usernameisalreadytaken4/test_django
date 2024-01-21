@@ -12,7 +12,7 @@ def handle_update(update):
     text = update['message']['text']
     send_message("sendMessage", {
         'chat_id': chat_id,
-        'text': f'you said {text}'
+        'text': text,
     })
 
 
