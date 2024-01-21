@@ -14,10 +14,12 @@ def handle_update(update):
         'text': 'проверка микрофона',
         'reply_markup': json.dumps({
             'inline_keyboard': [
-                {
-                    "text": "Button2",
-                    "url": "https://www.example.com"
-                },
+                [
+                    {
+                        "text": "Button2",
+                        "url": "https://www.example.com"
+                    },
+                ]
             ]
         })
     })
