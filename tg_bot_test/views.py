@@ -20,6 +20,7 @@ def handle_update(update):
 def telegram_bot(request):
     if request.method == 'POST':
         update = json.loads(request.body.decode('utf-8'))
+        print(update)
         handle_update(update)
         return HttpResponse('ok')
     return HttpResponseBadRequest('Bad Request')
