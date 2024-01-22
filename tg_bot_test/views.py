@@ -68,6 +68,6 @@ def set_button(data):
 @csrf_exempt
 def api_view(request):
     if request.method == 'POST':
-        print(request.json())
+        print(json.loads(request.body.decode('utf-8')))
     else:
         print(request)
