@@ -33,7 +33,7 @@
             document.getElementById('init-text').innerHTML = this.initData || 'Открыто в браузере'
 
             this.collectStat(function (result) {
-                document.getElementById('callback').innerHTML = result
+                document.getElementById('callback').innerHTML = JSON.stringify(result.response)
             })
         },
         close() {
