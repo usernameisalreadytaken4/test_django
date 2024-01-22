@@ -7,8 +7,12 @@
 <body>
 <button id="main-button">Текст</button>
 
-<span id="test-text">Дефолтный текст</span>
-<span id="test-text2">Дефолтный текст2</span>
+<div>
+    <span id="test-text">Дефолтный текст</span>
+</div>
+<div>
+    <span id="callback">колбэк</span>
+</div>
 
 </body>
 
@@ -26,10 +30,34 @@
                 text: 'Закрыть сайт',
                 is_visible: true
             }).onClick(ZaimApp.close);
+
+            ZaimApp.collectStat(function (result) {
+                document.getElementById('callback').innerHTML = result
+            })
         },
         close() {
             Telegram.WebApp.close();
         },
+
+        collectStat(onCallback) {
+            const authData = ZaimApp.initData || '';
+            fetch('/api/', {
+                method: 'POST',
+                body: JSON.stringify({
+                    _auth: authData,
+                }),
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(function (response) {
+                return response.json();
+            }).then(function (result) {
+                onCallback && onCallback(result);
+            }).catch(function (error) {
+                onCallback && onCallback({error: 'Server error'});
+            });
+        }
     };
 
     ZaimApp.init();
