@@ -1,9 +1,10 @@
 import json
-
+import urllib.parse
 import requests
 from django.conf import settings
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.urls import reverse_lazy
+from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -68,7 +69,10 @@ def set_button(data):
 @csrf_exempt
 def api_view(request):
     if request.method == 'POST':
-        print(json.loads(request.body.decode('utf-8')))
-    else:
-        print(request)
+        data = json.loads(request.body.decode('utf-8'))
+        auth = data['_auth']
+        user_data = json.loads(urllib.parse.parse_qs(auth)['user'][0])
+        user_data['timestamp'] = timezone.now()
+        user_data['event'] = 'visit_from_tg'
+        return JsonResponse(user_data)
     return HttpResponse(f'ok, {request.method}')
