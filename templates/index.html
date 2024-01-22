@@ -16,7 +16,7 @@
 <script type="application/javascript">
     Telegram.WebApp.ready()
     document.getElementById('test-text').innerHTML = 'я загрузился'
-    document.getElementById('test-text2').innerHTML = Telegram.WebApp
+    document.getElementById('test-text2').innerHTML = Telegram.WebApp.initData
 
     function mainButtonClickListener() {
         if (Telegram.WebApp.MainButton.text.toLowerCase() === 'view cart') {
