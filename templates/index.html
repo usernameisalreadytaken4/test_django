@@ -17,14 +17,7 @@
     Telegram.WebApp.ready()
     document.getElementById('test-text').innerHTML = 'я загрузился'
     document.getElementById('test-text2').innerHTML = Telegram.WebApp.initData
+    Telegram.WebApp.sendData(new Date().toString());
 
-    function mainButtonClickListener() {
-        if (Telegram.WebApp.MainButton.text.toLowerCase() === 'view cart') {
-            configureMainButton({text: 'close cart', color: '#FF0000', onclick: mainButtonClickListener});
-        } else {
-            configureMainButton({text: 'view cart', color: '#008000', onclick: mainButtonClickListener});
-        }
-        cart.classList.toggle('active');
-    }
 </script>
 </html>
