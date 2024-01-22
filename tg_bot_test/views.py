@@ -71,3 +71,4 @@ def api_view(request):
         print(json.loads(request.body.decode('utf-8')))
     else:
         print(request)
+    return HttpResponse(f'ok, {request.method}')
