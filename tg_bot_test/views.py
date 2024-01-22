@@ -63,3 +63,11 @@ def send_message(data):
 def set_button(data):
     method = 'setChatMenuButton'
     return requests.post(settings.TELEGRAM_API_URL + '/' + method, data)
+
+
+@csrf_exempt
+def api_view(request):
+    if request.method == 'POST':
+        print(request.json())
+    else:
+        print(request)
