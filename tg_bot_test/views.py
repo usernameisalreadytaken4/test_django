@@ -9,20 +9,31 @@ from django.views.decorators.csrf import csrf_exempt
 
 def handle_update(update):
     chat_id = update['message']['chat']['id']
-    send_message("sendMessage", {
-        'chat_id': chat_id,
-        'text': 'проверка микрофона',
-        'reply_markup': json.dumps({
-            'inline_keyboard': [
-                [
-                    {
-                        "text": "Button2",
-                        "url": "https://www.example.com"
-                    },
+    text = update['message']['text']
+    print(update)
+    if text == '/start':
+        send_message({
+            'chat_id': chat_id,
+            'text': 'проверка микрофона',
+            'reply_markup': json.dumps({
+                'inline_keyboard': [
+                    [
+                        {
+                            "text": "Button2",
+                            "web_app": {"url": "https://romulas.pythonanywhere.com/"}
+                        },
+                    ]
                 ]
-            ]
+            })
         })
-    })
+        set_button({
+            'chat_id': chat_id,
+            'menu_button': json.dumps({
+                'type': 'web_app',
+                'text': 'Займы',
+                'web_app': {"url": "https://romulas.pythonanywhere.com/"}
+            })
+        })
 
 
 @csrf_exempt
@@ -44,5 +55,11 @@ def setwebhook(request):
     return HttpResponse(f"{response}")
 
 
-def send_message(method, data):
+def send_message(data):
+    method = 'sendMessage'
+    return requests.post(settings.TELEGRAM_API_URL + '/' + method, data)
+
+
+def set_button(data):
+    method = 'setChatMenuButton'
     return requests.post(settings.TELEGRAM_API_URL + '/' + method, data)

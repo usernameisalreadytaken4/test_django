@@ -6,14 +6,17 @@
 </head>
 <body>
 <button id="main-button">Текст</button>
+
+<span id="test-text">Дефолтный текст</span>
+<span id="test-text2">Дефолтный текст2</span>
+
 </body>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script type="application/javascript">
     Telegram.WebApp.ready()
-    configureThemeColor(Telegram.WebApp.colorScheme);
-    configureMainButton({text: 'view cart', color: '#008000', onclick: mainButtonClickListener});
-    Telegram.WebApp.MainButton.show();
+    document.getElementById('test-text').innerHTML = 'я загрузился'
+    document.getElementById('test-text2').innerHTML = Telegram.WebApp
 
     function mainButtonClickListener() {
         if (Telegram.WebApp.MainButton.text.toLowerCase() === 'view cart') {
