@@ -44,9 +44,9 @@
             const authData = this.initData || '';
             fetch('/api/', {
                 method: 'POST',
-                body: JSON.stringify({
+                body: {
                     _auth: authData,
-                }),
+                },
                 credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json'
