@@ -58,11 +58,15 @@ def setwebhook(request):
 
 def send_message(data):
     method = 'sendMessage'
-    return requests.post(settings.TELEGRAM_API_URL + '/' + method, data)
+    return send_request(method, data)
 
 
 def set_button(data):
     method = 'setChatMenuButton'
+    return send_request(method, data)
+
+
+def send_request(method, data):
     return requests.post(settings.TELEGRAM_API_URL + '/' + method, data)
 
 
@@ -72,8 +76,14 @@ def api_view(request):
         data = json.loads(request.body.decode('utf-8'))
         print(data)
         auth = data['_auth']
+        method = data['method']
         user_data = json.loads(urllib.parse.parse_qs(auth)['user'][0])
         user_data['timestamp'] = timezone.now()
         user_data['event'] = 'visit_from_tg'
-        return JsonResponse(user_data)
+        # return JsonResponse(user_data)
+        to_send = {
+            'chat_id': auth['user'],
+            'text': 'hello world'
+        }
+        return send_request(method, to_send)
     return HttpResponse(f'ok, {request.method}')
