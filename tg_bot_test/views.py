@@ -70,6 +70,7 @@ def set_button(data):
 def api_view(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
+        print(data)
         auth = data['_auth']
         user_data = json.loads(urllib.parse.parse_qs(auth)['user'][0])
         user_data['timestamp'] = timezone.now()
