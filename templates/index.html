@@ -35,6 +35,8 @@
             this.collectStat(function (result) {
                 document.getElementById('callback').innerHTML = result
             })
+
+            Telegram.WebApp.sendData('sendText trigger')
         },
         close() {
             Telegram.WebApp.close();
